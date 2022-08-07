@@ -91,7 +91,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: reearth-marketplace-web
-          path: reearth-marketplace-web.tar.gz
+          path: web/reearth-marketplace-web.tar.gz
           if-no-files-found: error
   ci_server:
     needs: ci_pre
