@@ -5,7 +5,7 @@ on:
     types: ["completed"]
     branches: ["main"]
 jobs:
-  ci_:
+  build:
     runs-on: ubuntu-latest
     needs:
       - ci_web
