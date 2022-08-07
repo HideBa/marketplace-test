@@ -18,7 +18,7 @@ jobs:
         ports:
           - 27017:27017
     steps:
-      - uses: echo result
+      - name: echo result
         run: echo "-------${{ needs.ci_pre.outputs.server }}"
       - uses: actions/setup-go@v3
         with:
