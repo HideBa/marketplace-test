@@ -48,7 +48,7 @@ jobs:
         run: |
           echo "-----------------server files changed-----------------"
           echo "::set-output name=changed::true"
-  ci-web:
+  ci_web:
     needs: ci_pre
     if: ${{ needs.ci_pre.outputs.web == 'true' }}
     runs-on: ubuntu-latest
@@ -94,7 +94,7 @@ jobs:
       #   with:
       #     name: build
       #     path: reearth-web.tar.gz
-  ci-server:
+  ci_server:
     needs: ci_pre
     if: ${{ needs.ci_pre.outputs.server == 'true' }}
     runs-on: ubuntu-latest
