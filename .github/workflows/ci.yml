@@ -88,7 +88,7 @@ jobs:
         run: mv dist reearth-marketplace-web && tar -zcvf reearth-marketplace-web.tar.gz reearth-marketplace-web
       - uses: actions/upload-artifact@v2
         with:
-          name: build
+          name: build-web
           path: reearth-marketplace-web.tar.gz
   ci_server:
     needs: ci_pre
