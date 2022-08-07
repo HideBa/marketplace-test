@@ -3,11 +3,12 @@ on:
   workflow_run:
     workflows: [ci_pre]
     types: [completed]
+  workflow_call:
 
 jobs:
   ci-server:
     # needs: ci_pre
-    if: ${{ needs.ci_pre.outputs.server == 'true' }}
+    # if: ${{ needs.ci_pre.outputs.server == 'true' }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -18,6 +19,10 @@ jobs:
         ports:
           - 27017:27017
     steps:
+      - name: show github
+        run: echo "--- ${{ toJSON(github) }}"
+      - name: show context
+        run: $(echo '${{ toJSON(github) }}' | jq -r ".sha[0:7]")
       - name: echo result
         run: echo "-------${{ needs.ci_pre.outputs.server }}"
       - uses: actions/setup-go@v3

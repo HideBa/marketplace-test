@@ -1,9 +1,11 @@
 name: ci_pre
 on:
-  pull_request:
-  push:
-    branches:
-      - "main"
+  # pull_request:
+  # push:
+  #   branches:
+  #     - "main"
+  workflow_call:
+
 jobs:
   ci_pre:
     runs-on: ubuntu-latest
