@@ -1,9 +1,8 @@
 name: ci
 on:
-  pull_request:
-  push:
-    branches:
-      - "main"
+  workflow_run:
+    workflows: [ci_server, ci_wer]
+    types: [completed]
 jobs:
   ci:
     runs-on: ubuntu-latest
