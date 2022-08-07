@@ -14,38 +14,36 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: hello
-        run: echo "hello!"
-      - name: Get changed files
-        id: changed-web-files
-        uses: tj-actions/changed-files@v24
-        with:
-          files: |
-            .github/workflows/web.yml
-            .github/workflows/ci_pre.yml
-            .github/CODEOWNERS
-            .renovate.json
-            web/**
-            .eslintignore
+      # - name: Get changed files
+      #   id: changed-web-files
+      #   uses: tj-actions/changed-files@v24
+      #   with:
+      #     files: |
+      #       .github/workflows/web.yml
+      #       .github/workflows/ci_pre.yml
+      #       .github/CODEOWNERS
+      #       .renovate.json
+      #       web/**
+      #       .eslintignore
       - name: Detect web changes
         id: web-changes
-        if: steps.changed-web-files.outputs.any_changed == 'true'
+        # if: steps.changed-web-files.outputs.any_changed == 'true'
         run: |
           echo "-----------------web files changed-----------------"
           echo "::set-output name=changed::true"
-      - name: Get server changed files
-        id: changed-server-files
-        uses: tj-actions/changed-files@v24
-        with:
-          files: |
-            .github/workflows/server.yml
-            .github/workflows/ci_pre.yml
-            .github/CODEOWNERS
-            .renovate.json
-            server/**
+      # - name: Get server changed files
+      #   id: changed-server-files
+      #   uses: tj-actions/changed-files@v24
+      #   with:
+      #     files: |
+      #       .github/workflows/server.yml
+      #       .github/workflows/ci_pre.yml
+      #       .github/CODEOWNERS
+      #       .renovate.json
+      #       server/**
       - name: Detect server changes
         id: server-changes
-        if: steps.changed-server-files.outputs.any_changed == 'true'
+        # if: steps.changed-server-files.outputs.any_changed == 'true'
         run: |
           echo "-----------------server files changed-----------------"
           echo "::set-output name=changed::true"
