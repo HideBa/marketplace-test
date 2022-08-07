@@ -7,7 +7,7 @@ on:
 jobs:
   ci-server:
     needs: ci_pre
-    if: ${{ needs.ci_pre.outputs.server == 'true' }}
+    # if: ${{ needs.ci_pre.outputs.server == 'true' }}
     runs-on: ubuntu-latest
     defaults:
       run:
