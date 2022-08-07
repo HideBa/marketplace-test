@@ -70,30 +70,29 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install
         run: yarn install
-      - name: Lint
-        run: yarn run lint
-      - name: Test
-        run: yarn coverage
-      - name: codecov
-        uses: codecov/codecov-action@v2
-        with:
-          flags: web
-      - name: Check translations
-        run: yarn i18n --fail-on-update
+      # - name: Lint
+      #   run: yarn run lint
+      # - name: Test
+      #   run: yarn coverage
+      # - name: codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     flags: web
+      # - name: Check translations
+      #   run: yarn i18n --fail-on-update
       - name: Build
         run: yarn build
       - name: Build extension
         run: yarn build:ext
-      - name: list files
-        run: ls -l
       - name: Pack
         run: mv dist reearth-marketplace-web && tar -zcvf reearth-marketplace-web.tar.gz reearth-marketplace-web
       - name: list files2
         run: ls -l
       - uses: actions/upload-artifact@v2
         with:
-          name: build-web
+          name: reearth-marketplace-web
           path: reearth-marketplace-web.tar.gz
+          if-no-files-found: error
   ci_server:
     needs: ci_pre
     if: ${{ needs.ci_pre.outputs.server == 'true' }}
@@ -127,7 +126,7 @@ jobs:
       # - name: test
       #   run: go test ./... -v -race -coverprofile=coverage.txt -covermode=atomic
       #   env:
-      #     REEARTH_CMS_DB: mongodb://localhost
+      #     REEARTH_MARKETPLACE_DB: mongodb://localhost
       # - name: codecov
       #   uses: codecov/codecov-action@v2
       #   with:
