@@ -84,8 +84,12 @@ jobs:
         run: yarn build
       - name: Build extension
         run: yarn build:ext
+      - name: list files
+        run: ls -l
       - name: Pack
         run: mv dist reearth-marketplace-web && tar -zcvf reearth-marketplace-web.tar.gz reearth-marketplace-web
+      - name: list files2
+        run: ls -l
       - uses: actions/upload-artifact@v2
         with:
           name: build-web
