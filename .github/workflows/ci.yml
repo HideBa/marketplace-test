@@ -1,9 +1,9 @@
 name: ci
 on:
   pull_request:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
 
 jobs:
   ci_pre:
@@ -30,7 +30,6 @@ jobs:
         id: web-changes
         # if: steps.changed-web-files.outputs.any_changed == 'true'
         run: |
-          echo "-----------------web files changed-----------------"
           echo "::set-output name=changed::true"
       # - name: Get server changed files
       #   id: changed-server-files
@@ -46,7 +45,6 @@ jobs:
         id: server-changes
         # if: steps.changed-server-files.outputs.any_changed == 'true'
         run: |
-          echo "-----------------server files changed-----------------"
           echo "::set-output name=changed::true"
   ci_web:
     needs: ci_pre
@@ -91,7 +89,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: build
-          path: reearth-web.tar.gz
+          path: reearth-marketplace-web.tar.gz
   ci_server:
     needs: ci_pre
     if: ${{ needs.ci_pre.outputs.server == 'true' }}
