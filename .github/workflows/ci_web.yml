@@ -1,0 +1,54 @@
+name: ci web
+on:
+  pull_request:
+  # TODO: uncomment here
+  # workflow_run:
+  #   workflows: [ci_pre]
+  #   types: [completed]
+
+jobs:
+  ci-web:
+    # TODO: uncomment here
+    # needs: ci_pre
+    # if: ${{ needs.ci_pre.outputs.web == 'true' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - uses: actions/checkout@v3
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install
+        run: yarn install
+      - name: Lint
+        run: yarn run lint
+      - name: Test
+        run: yarn coverage
+      - name: codecov
+        uses: codecov/codecov-action@v2
+        with:
+          flags: web
+      - name: Check translations
+        run: yarn i18n --fail-on-update
+      - name: Build
+        run: yarn build
+      - name: Build extension
+        run: yarn build:ext
+      - name: Pack
+        run: mv dist reearth-marketplace-web && tar -zcvf reearth-marketplace-web.tar.gz reearth-marketplace-web
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: reearth-web.tar.gz
