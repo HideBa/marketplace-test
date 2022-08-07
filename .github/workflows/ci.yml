@@ -1,7 +1,7 @@
 name: ci
 on:
   workflow_run:
-    workflows: [ci_server, ci_wer]
+    workflows: [ci_web, ci_server]
     types: [completed]
 jobs:
   ci:

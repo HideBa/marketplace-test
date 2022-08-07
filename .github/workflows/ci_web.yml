@@ -1,16 +1,13 @@
 name: ci web
 on:
-  pull_request:
-  # TODO: uncomment here
-  # workflow_run:
-  #   workflows: [ci_pre]
-  #   types: [completed]
+  workflow_run:
+    workflows: [ci_pre]
+    types: [completed]
 
 jobs:
   ci-web:
-    # TODO: uncomment here
-    # needs: ci_pre
-    # if: ${{ needs.ci_pre.outputs.web == 'true' }}
+    needs: ci_pre
+    if: ${{ needs.ci_pre.outputs.web == 'true' }}
     runs-on: ubuntu-latest
     defaults:
       run:
