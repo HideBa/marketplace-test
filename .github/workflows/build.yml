@@ -42,7 +42,6 @@ jobs:
     #   - info
     env:
       IMAGE_NAME: reearth/reearth-marketplace
-      WEB_ARTIFACTS: reearth-marketplace-web.tar.gz
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -91,7 +90,7 @@ jobs:
           branch: main
           name: reearth-marketplace-web
           check_artifacts: true
-          path: $WEB_ARTIFACTS
+          path: reearth-marketplace-web.tar.gz
       - name: Extract
         run: mv reearth-marketplace-web.tar.gz && tar -xvf reearth-market-place-web.tar.gz
       - name: Build and push docker image
