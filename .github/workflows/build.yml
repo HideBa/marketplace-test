@@ -90,7 +90,6 @@ jobs:
           branch: main
           name: reearth-marketplace-web
           check_artifacts: true
-          path: reearth-marketplace-web.tar.gz
       - name: Extract
         run: tar -xvf reearth-marketplace-web.tar.gz && mv reearth-marketplace-web web
       - name: Build and push docker image
