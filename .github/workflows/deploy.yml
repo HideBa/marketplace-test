@@ -41,7 +41,9 @@ jobs:
       id-token: write
       packages: read
     steps:
-      # - uses: google-github-actions/auth@v0
+      - uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
       #   with:
       #     workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       #     service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
